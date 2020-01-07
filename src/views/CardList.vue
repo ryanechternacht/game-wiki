@@ -50,9 +50,16 @@ export default {
       };
     },
     buildFilterFunc(filter) {
+      if (filter.has) {
+        return this.buildHasTagFilter(filter);
+      } else {
+        console.log("unknown filter");
+      }
+    },
+    buildHasTagFilter(filter) {
       return c => {
         return this._.some(c.tags, t => {
-          return t.name == "building tag" && t.value == "building";
+          return t.name == filter.has.tag && t.value == filter.has.value;
         });
       };
     }

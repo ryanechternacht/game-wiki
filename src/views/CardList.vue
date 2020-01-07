@@ -5,6 +5,7 @@
     </ul>
     <div>{{filters}}</div>
     <button @click="this.filterByBuildingTags">Filter By Building Tags</button>
+    <button @click="this.clearFilters">Filter By Building Tags</button>
   </div>
 </template>
 
@@ -43,6 +44,9 @@ export default {
           value: "building"
         }
       });
+    },
+    clearFilters() {
+      this.filters = [];
     },
     buildFilterObject(filters) {
       return filters.length

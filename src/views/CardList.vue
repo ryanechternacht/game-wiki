@@ -5,7 +5,7 @@
     </ul>
     <div>{{filters}}</div>
     <button @click="this.filterByBuildingTags">Filter By Building Tags</button>
-    <button @click="this.clearFilters">Filter By Building Tags</button>
+    <button @click="this.clearFilters">Clear Filters</button>
   </div>
 </template>
 
@@ -27,13 +27,8 @@ export default {
       if (!this.filters.length) {
         return this.cards;
       }
-      let filter = this.buildFilterObject(this.filters);
-      return this._.filter(this.cards, c => {
-        // only building tag right now
-        return this._.some(c.tags, t => {
-          return t.name == "building tag" && t.value == "building";
-        });
-      });
+      let filter = this.buildFilter(this.filters);
+      return _.filter(this.cards, filter);
     }
   },
   methods: {
@@ -48,14 +43,18 @@ export default {
     clearFilters() {
       this.filters = [];
     },
-    buildFilterObject(filters) {
-      return filters.length
-        ? [
-            {
-              buildingTag: true
-            }
-          ]
-        : [];
+    buildFilter(filters) {
+      let funcs = this._.map(filters, this.buildFilterFunc);
+      return c => {
+        return this._.some(funcs, f => f(c));
+      };
+    },
+    buildFilterFunc(filter) {
+      return c => {
+        return this._.some(c.tags, t => {
+          return t.name == "building tag" && t.value == "building";
+        });
+      };
     }
   }
 };

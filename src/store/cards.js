@@ -58,7 +58,7 @@ export default {
       tags: [
         {
           name: "building tag",
-          value: "city"
+          value: "building"
         },
         {
           name: "is action",

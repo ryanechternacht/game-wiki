@@ -4,7 +4,8 @@
       <li v-for="c in filteredCards" :key="c.id">{{c.name}}</li>
     </ul>
     <div>{{filters}}</div>
-    <button @click="this.filterByBuildingTags">Filter By Building Tags</button>
+    <button @click="filterByBuildingTags('building')">Filter By Building Tags</button>
+    <button @click="filterByBuildingTags('power')">Filter By Power Tags</button>
     <button @click="this.clearFilters">Clear Filters</button>
   </div>
 </template>
@@ -32,11 +33,11 @@ export default {
     }
   },
   methods: {
-    filterByBuildingTags() {
+    filterByBuildingTags(tag) {
       this.filters.push({
         has: {
           tag: "building tag",
-          value: "building"
+          value: tag
         }
       });
     },
@@ -46,7 +47,7 @@ export default {
     buildFilter(filters) {
       let funcs = this._.map(filters, this.buildFilterFunc);
       return c => {
-        return this._.some(funcs, f => f(c));
+        return this._.every(funcs, f => f(c));
       };
     },
     buildFilterFunc(filter) {

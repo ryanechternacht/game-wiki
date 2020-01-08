@@ -4,8 +4,8 @@
       <li v-for="c in filteredCards" :key="c.id">{{c.name}}</li>
     </ul>
     <div>{{filters}}</div>
-    <button @click="filterByBuildingTags('building')">Filter By Building Tags</button>
-    <button @click="filterByBuildingTags('power')">Filter By Power Tags</button>
+    <button @click="filterByCategoryTag('building tag', 'building')">Filter By Building Tags</button>
+    <button @click="filterByCategoryTag('building tag', 'power')">Filter By Power Tags</button>
     <button @click="this.clearFilters">Clear Filters</button>
   </div>
 </template>
@@ -33,13 +33,8 @@ export default {
     }
   },
   methods: {
-    filterByBuildingTags(tag) {
-      this.filters.push({
-        has: {
-          tag: "building tag",
-          value: tag
-        }
-      });
+    filterByCategoryTag(tag, value) {
+      this.filters.push({ has: { tag, value } });
     },
     clearFilters() {
       this.filters = [];

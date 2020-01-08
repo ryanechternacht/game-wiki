@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     filterByCategoryTag(tag, value) {
-      this.filters.push({ has: { tag, value } });
+      this.filters.push({ category: { tag, value } });
     },
     clearFilters() {
       this.filters = [];
@@ -46,18 +46,18 @@ export default {
       };
     },
     buildFilterFunc(filter) {
-      if (filter.has) {
-        return this.buildHasTagFilter(filter);
+      if (filter.category) {
+        return this.buildCategoryTagFilter(filter);
       } else {
         console.log("unknown filter");
       }
     },
-    buildHasTagFilter(filter) {
-      return c => {
-        return this._.some(c.tags, t => {
-          return t.name == filter.has.tag && t.value == filter.has.value;
-        });
-      };
+    buildCategoryTagFilter(filter) {
+      return c =>
+        this._.some(
+          c.tags,
+          t => t.name == filter.category.tag && t.value == filter.category.value
+        );
     }
   }
 };

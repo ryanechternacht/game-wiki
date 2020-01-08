@@ -1,10 +1,5 @@
 <template>
   <div>
-    <h4>Cards: {{filteredCards.length}}</h4>
-    <ul>
-      <li v-for="c in filteredCards" :key="c.id">{{c.name}}</li>
-    </ul>
-    <div>filters: {{filters}}</div>
     <category-filter
       description="Card Type"
       category="type"
@@ -18,7 +13,13 @@
       @add-filter="addFilter"
     />
     <existence-filter description="Is an Action" type="action" @add-filter="addFilter" />
+    <filter-list :filters="filters" />
     <button @click="this.clearFilters">Clear Filters</button>
+    <hr />
+    <h4>Cards: {{filteredCards.length}}</h4>
+    <ul>
+      <li v-for="c in filteredCards" :key="c.id">{{c.name}}</li>
+    </ul>
   </div>
 </template>
 
@@ -26,12 +27,14 @@
 import { mapState } from "vuex";
 import CategoryFilter from "@/components/CategoryFilter";
 import ExistenceFilter from "@/components/ExistenceFilter";
+import FilterList from "@/components/FilterList";
 
 export default {
   name: "card-list",
   components: {
     CategoryFilter,
-    ExistenceFilter
+    ExistenceFilter,
+    FilterList
   },
   data() {
     return {

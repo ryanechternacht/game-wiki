@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{description}}:
     <select v-model="selected">
       <option v-for="v in values" :key="v">{{v}}</option>
     </select>
@@ -10,7 +11,7 @@
 <script>
 export default {
   name: "category-filter",
-  props: ["category", "values"],
+  props: ["category", "values", "description"],
   data() {
     return {
       selected: null

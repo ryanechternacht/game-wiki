@@ -3,21 +3,37 @@
     <ul>
       <li v-for="c in filteredCards" :key="c.id">{{c.name}}</li>
     </ul>
-    <div>{{filters}}</div>
-    <button @click="filterByCategoryTag('building tag', 'building')">Filter By Building Tags</button>
-    <button @click="filterByCategoryTag('building tag', 'power')">Filter By Power Tags</button>
+    <div>filters: {{filters}}</div>
+    <category-filter category="building tag" :values="buildingTags" @add-filter="addFilter" />
     <button @click="this.clearFilters">Clear Filters</button>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import CategoryFilter from "@/components/CategoryFilter";
 
 export default {
   name: "card-list",
+  components: {
+    CategoryFilter
+  },
   data() {
     return {
-      filters: []
+      filters: [],
+      buildingTags: [
+        "power",
+        "building",
+        "city",
+        "event",
+        "space",
+        "jove",
+        "venus",
+        "animal",
+        "microbe",
+        "plant",
+        "science"
+      ]
     };
   },
   computed: {
@@ -33,8 +49,8 @@ export default {
     }
   },
   methods: {
-    filterByCategoryTag(tag, value) {
-      this.filters.push({ category: { tag, value } });
+    addFilter(filter) {
+      this.filters.push(filter);
     },
     clearFilters() {
       this.filters = [];

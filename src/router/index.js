@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import CardList from "@/views/CardList.vue";
+import CardList from "@/views/CardList";
 
 Vue.use(VueRouter);
 

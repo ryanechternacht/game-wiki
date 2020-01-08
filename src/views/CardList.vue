@@ -4,7 +4,14 @@
       <li v-for="c in filteredCards" :key="c.id">{{c.name}}</li>
     </ul>
     <div>filters: {{filters}}</div>
-    <category-filter category="building tag" :values="buildingTags" @add-filter="addFilter" />
+    <div>
+      card type
+      <category-filter category="type" :values="cardTypes" @add-filter="addFilter" />
+    </div>
+    <div>
+      building tag:
+      <category-filter category="building tag" :values="buildingTags" @add-filter="addFilter" />
+    </div>
     <button @click="this.clearFilters">Clear Filters</button>
   </div>
 </template>
@@ -21,6 +28,7 @@ export default {
   data() {
     return {
       filters: [],
+      cardTypes: ["automated", "active", "event"],
       buildingTags: [
         "power",
         "building",

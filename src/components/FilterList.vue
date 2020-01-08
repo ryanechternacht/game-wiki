@@ -2,7 +2,13 @@
   <div>
     <div class="filter-list">
       Filters:
-      <filter-chip v-for="(f, i) in filters" :filter="f" :key="i" />
+      <!-- bad key value here -->
+      <filter-chip
+        v-for="(f, i) in filters"
+        :filter="f"
+        :key="i"
+        @remove-filter="$emit('remove-filter', i)"
+      />
     </div>
   </div>
 </template>

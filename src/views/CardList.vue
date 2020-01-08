@@ -13,7 +13,7 @@
       @add-filter="addFilter"
     />
     <existence-filter description="Is an Action" type="action" @add-filter="addFilter" />
-    <filter-list :filters="filters" />
+    <filter-list :filters="filters" @remove-filter="removeFilter" />
     <button @click="this.clearFilters">Clear Filters</button>
     <hr />
     <h4>Cards: {{filteredCards.length}}</h4>
@@ -104,6 +104,9 @@ export default {
     },
     buildDoesntExistFilter(filter) {
       return c => this._.every(c.tags, t => t.name != filter.doesntHave.tag);
+    },
+    removeFilter(i) {
+      this.filters.splice(i, 1);
     }
   }
 };

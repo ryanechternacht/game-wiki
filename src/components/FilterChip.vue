@@ -1,5 +1,8 @@
 <template>
-  <span class="chip">{{displayText}}</span>
+  <span class="chip">
+    {{displayText}}
+    <span @click="$emit('remove-filter')" class="close-button">X</span>
+  </span>
 </template>
 
 <script>
@@ -35,5 +38,11 @@ export default {
   background-color: #e4e4e4;
   margin-bottom: 5px;
   margin-right: 5px;
+}
+
+.close-button {
+  padding-left: 5px;
+  padding-right: 5px;
+  cursor: pointer;
 }
 </style>

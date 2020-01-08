@@ -78,6 +78,10 @@ export default {
         {
           name: "type",
           value: "active"
+        },
+        {
+          name: "action",
+          value: true
         }
       ],
       cost: 3

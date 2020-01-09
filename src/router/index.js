@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 
 import CardList from "@/views/CardList";
 import FAQ from "@/views/FAQ";
+import FaqLayout from "@/views/faq/FaqLayout";
+import FaqHome from "@/views/faq/FaqHome";
 
 Vue.use(VueRouter);
 
@@ -12,10 +14,23 @@ const routes = [
     name: "card-list",
     component: CardList
   },
+  // {
+  //   path: "/faq",
+  //   name: "faq",
+  //   component: FAQ
+  // }
   {
     path: "/faq",
-    name: "faq",
-    component: FAQ
+    component: FaqLayout,
+    // props: true,
+    children: [
+      {
+        path: "",
+        component: FaqHome,
+        name: "faq-home"
+        // props: true,
+      }
+    ]
   }
 ];
 

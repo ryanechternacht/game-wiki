@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import cardList from "./cards.js";
-import faqList from "./faq.js";
+import faqList from "./faqs.js";
 
 Vue.use(Vuex);
 

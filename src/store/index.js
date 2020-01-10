@@ -14,7 +14,11 @@ export default new Vuex.Store({
     faqs: faqList.faqs,
     faqSearch: []
   },
-  getters: {},
+  getters: {
+    getFaq: state => id => {
+      return state.faqs[id - 1]; // hack
+    }
+  },
   mutations: {
     commitSearchFaq(state, faqs) {
       state.faqSearch = faqs;

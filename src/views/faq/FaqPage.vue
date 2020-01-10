@@ -1,21 +1,30 @@
 <template>
-  <div style="margin-left: 40px">FAQ PAGE (TODO)</div>
+  <div style="margin-left: 40px">
+    <h2>{{faq.title}}</h2>
+
+    <h4>Tags</h4>
+    <ul>
+      <li v-for="(t, i) in faq.tags" :key="i">{{t}}</li>
+    </ul>
+
+    <h4>Body</h4>
+    <p>{{faq.body}}</p>
+  </div>
 </template>
 
 <script>
-// import { mapState, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 export default {
-  props: [],
+  props: ["id"],
   created() {
-    // this.searchFaq({ term: this.term });
+    // fetch data?
   },
   computed: {
-    // ...mapState({
-    //   searchedFaqs: state => state.faqSearch
-    // })
+    ...mapGetters(["getFaq"]),
+    faq() {
+      return this.getFaq(this.id);
+    }
   },
-  methods: {
-    // ...mapActions(["searchFaq"])
-  }
+  methods: {}
 };
 </script>

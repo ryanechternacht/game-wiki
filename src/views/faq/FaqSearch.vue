@@ -15,7 +15,7 @@ import { mapState, mapActions } from "vuex";
 export default {
   props: ["term"],
   created() {
-    this.searchFaq({ term: this.term });
+    this.search();
   },
   computed: {
     ...mapState({
@@ -23,7 +23,13 @@ export default {
     })
   },
   methods: {
-    ...mapActions(["searchFaq"])
+    ...mapActions(["searchFaq"]),
+    search() {
+      this.searchFaq({ term: this.term });
+    }
+  },
+  watch: {
+    $route: "search"
   }
 };
 </script>

@@ -3,13 +3,24 @@
     <div class="float-right">
       <button>new entry</button>
     </div>
-    <div>
-      <input placeholder="search" />
-    </div>
+    <faq-search initialSearch="hello" @search="search" />
     <div>Tags: ... ... ...</div>
   </div>
 </template>
 
 <script>
-export default {};
+import FaqSearch from "@/components/faq/FaqSearch";
+export default {
+  components: {
+    FaqSearch
+  },
+  methods: {
+    search(term) {
+      this.$router.push({
+        name: "faq-search",
+        params: { term }
+      });
+    }
+  }
+};
 </script>

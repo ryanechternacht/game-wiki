@@ -18,6 +18,7 @@ const routes = [
   {
     path: "/faq",
     component: FaqLayout,
+    name: "faq",
     props: true,
     children: [
       {

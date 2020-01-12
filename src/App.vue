@@ -7,9 +7,6 @@
         type="button"
         data-toggle="collapse"
         data-target="#navbar-options"
-        aria-controls="navbar-options"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -25,7 +22,7 @@
       </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container">
       <router-view />
     </div>
   </div>

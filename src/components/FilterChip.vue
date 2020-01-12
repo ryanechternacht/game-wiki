@@ -17,6 +17,8 @@ export default {
         return `Has ${this.filter.has.tag}`;
       } else if (this.filter.doesntHave) {
         return `Doesn't Have ${this.filter.doesntHave.tag}`;
+      } else {
+        return "Unknown Filter";
       }
     }
   },
@@ -36,7 +38,6 @@ export default {
   padding: 0 12px;
   border-radius: 16px;
   background-color: #e4e4e4;
-  margin-bottom: 5px;
   margin-right: 5px;
 }
 
@@ -44,5 +45,6 @@ export default {
   padding-left: 5px;
   padding-right: 5px;
   cursor: pointer;
+  font-weight: bolder;
 }
 </style>

@@ -1,15 +1,11 @@
 <template>
-  <div>
-    <div class="filter-list">
-      Filters:
-      <!-- bad key value here -->
-      <filter-chip
-        v-for="(f, i) in filters"
-        :filter="f"
-        :key="i"
-        @remove-filter="$emit('remove-filter', i)"
-      />
-    </div>
+  <div class="inline">
+    <filter-chip
+      v-for="(f, i) in filters"
+      :filter="f"
+      :key="i"
+      @remove-filter="$emit('remove-filter', i)"
+    />
   </div>
 </template>
 
@@ -30,4 +26,7 @@ export default {
 </script>
 
 <style scoped>
+.inline {
+  display: inline;
+}
 </style>

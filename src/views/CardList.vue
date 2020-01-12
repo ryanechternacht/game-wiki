@@ -1,25 +1,46 @@
 <template>
   <div>
-    <category-filter
-      description="Card Type"
-      category="type"
-      :values="cardTypes"
-      @add-filter="addFilter"
-    />
-    <category-filter
-      description="Building Tag"
-      category="building tag"
-      :values="buildingTags"
-      @add-filter="addFilter"
-    />
-    <existence-filter description="Is an Action" type="action" @add-filter="addFilter" />
-    <filter-list :filters="filters" @remove-filter="removeFilter" />
-    <button @click="this.clearFilters">Clear Filters</button>
+    <h3>Filter Cards</h3>
+
+    <div class="header-row inline chip-height">
+      Active Filters:
+      <div class="inline">
+        <filter-list :filters="filters" @remove-filter="removeFilter" />
+      </div>
+    </div>
+
+    <div class="header-row">
+      <category-filter
+        description="Card Type"
+        category="type"
+        :values="cardTypes"
+        @add-filter="addFilter"
+      />
+    </div>
+    <div class="header-row">
+      <category-filter
+        description="Building Tag"
+        category="building tag"
+        :values="buildingTags"
+        @add-filter="addFilter"
+      />
+    </div>
+    <div class="header-row">
+      <existence-filter description="Is an Action" type="action" @add-filter="addFilter" />
+    </div>
+
+    <div class="header-row">
+      <button @click="this.clearFilters">Clear Filters</button>
+    </div>
+
     <hr />
-    <h4>Cards: {{filteredCards.length}}</h4>
-    <ul>
-      <li v-for="c in filteredCards" :key="c.id">{{c.name}}</li>
-    </ul>
+
+    <div>
+      <h4>Cards: {{filteredCards.length}}</h4>
+      <ul>
+        <li v-for="c in filteredCards" :key="c.id">{{c.name}}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -111,3 +132,18 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.header-row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.inline {
+  display: inline;
+}
+
+.chip-height {
+  line-height: 36px;
+}
+</style>

@@ -1,9 +1,7 @@
 <template>
   <div>
     {{description}}:
-    <select v-model="selected">
-      <option v-for="v in values" :key="v">{{v}}</option>
-    </select>
+    <b-form-select v-model="selected" :options="formattedOptions" />
     <button @click="addFilter(selected)">Add Filter</button>
   </div>
 </template>
@@ -14,8 +12,13 @@ export default {
   props: ["category", "values", "description"],
   data() {
     return {
-      selected: null
+      selected: this.values && this.values.length && this.values[0]
     };
+  },
+  computed: {
+    formattedOptions() {
+      return this._.map(this.values, v => ({ text: v, value: v }));
+    }
   },
   methods: {
     addFilter(value) {

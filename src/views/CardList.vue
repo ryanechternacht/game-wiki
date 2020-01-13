@@ -85,7 +85,7 @@ export default {
         return this.cards;
       }
       let filter = this.buildFilter(this.filters);
-      return _.filter(this.cards, filter);
+      return this._.filter(this.cards, filter);
     }
   },
   methods: {

@@ -1,26 +1,16 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <router-link to="/" class="navbar-brand">Game Wiki</router-link>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbar-options"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar-options">
-        <ul class="navbar-nav">
-          <li class="nav-item" :class="{active: area == 'card-list'}">
-            <router-link class="nav-link" to="/">Card List</router-link>
-          </li>
-          <li class="nav-item" :class="{active: area == 'faq'}">
-            <router-link class="nav-link" to="/faq">FAQ</router-link>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <b-navbar toggleable="lg" type="dark" variant="primary">
+      <b-navbar-brand to="/">Game Wiki</b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item to="/" :class="{active: area == 'card-list'}">Card List</b-nav-item>
+          <b-nav-item to="/faq" :class="{active: area == 'faq'}">FAQ</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
 
     <div class="container">
       <router-view />

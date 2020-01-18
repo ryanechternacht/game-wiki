@@ -3,8 +3,8 @@
     <span class="col-3">{{description}}</span>
     <span class="col-3">
       <b-button-group>
-        <b-button @click="addHasFilter(true)" variant="outline-primary">Yes</b-button>
-        <b-button @click="addDoesntHaveFilter(false)" variant="outline-primary">No</b-button>
+        <b-button @click="addHasFilter()" variant="outline-primary">Yes</b-button>
+        <b-button @click="addDoesntHaveFilter()" variant="outline-primary">No</b-button>
       </b-button-group>
     </span>
   </div>
@@ -20,10 +20,10 @@ export default {
     };
   },
   methods: {
-    addHasFilter(value) {
+    addHasFilter() {
       this.$emit("add-filter", { has: { tag: this.type } });
     },
-    addDoesntHaveFilter(value) {
+    addDoesntHaveFilter() {
       this.$emit("add-filter", { doesntHave: { tag: this.type } });
     }
   }

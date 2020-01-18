@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-left: 40px">
+  <div>
     <h2>Results for {{term}}:</h2>
 
     <ol>

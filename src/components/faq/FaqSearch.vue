@@ -2,7 +2,7 @@
   <div>
     <b-form @submit.prevent="submit" inline>
       <b-input placeholder="search" v-model="term" class="mr-4" />
-      <b-button @click="submit">Search</b-button>
+      <b-button @click="submit" variant="primary">Search</b-button>
     </b-form>
   </div>
 </template>

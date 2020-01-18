@@ -1,7 +1,7 @@
 <template>
-  <div style="margin-left: 40px">
+  <div>
     <div class="float-right">
-      <button>new entry</button>
+      <b-button variant="primary" disabled>New Entry</b-button>
     </div>
     <faq-search initialSearch="hello" @search="search" />
     <div>Tags: ... ... ...</div>

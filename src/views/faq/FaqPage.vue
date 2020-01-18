@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-left: 40px">
+  <div>
     <h2>{{faq.title}}</h2>
 
     <h4>Tags</h4>

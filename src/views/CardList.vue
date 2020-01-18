@@ -46,9 +46,9 @@
 
 <script>
 import { mapState } from "vuex";
-import CategoryFilter from "@/components/CategoryFilter";
-import ExistenceFilter from "@/components/ExistenceFilter";
-import FilterList from "@/components/FilterList";
+import CategoryFilter from "@/components/card-list/CategoryFilter";
+import ExistenceFilter from "@/components/card-list/ExistenceFilter";
+import FilterList from "@/components/card-list/FilterList";
 
 export default {
   name: "card-list",

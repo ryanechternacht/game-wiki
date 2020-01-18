@@ -12,7 +12,7 @@
       </b-collapse>
     </b-navbar>
 
-    <div class="container">
+    <div class="container main-view">
       <router-view />
     </div>
   </div>
@@ -37,4 +37,7 @@ export default {
 </script>
 
 <style>
+.main-view {
+  margin-top: 20px;
+}
 </style>

@@ -1,8 +1,12 @@
 <template>
-  <div>
-    {{description}}
-    <button @click="addHasFilter(true)">Yes</button>
-    <button @click="addDoesntHaveFilter(false)">No</button>
+  <div class="row">
+    <span class="col-3">{{description}}</span>
+    <span class="col-3">
+      <b-button-group>
+        <b-button @click="addHasFilter(true)" variant="outline-primary">Yes</b-button>
+        <b-button @click="addDoesntHaveFilter(false)" variant="outline-primary">No</b-button>
+      </b-button-group>
+    </span>
   </div>
 </template>
 

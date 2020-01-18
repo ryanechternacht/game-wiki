@@ -1,8 +1,12 @@
 <template>
-  <div>
-    {{description}}:
-    <b-form-select v-model="selected" :options="formattedOptions" />
-    <button @click="addFilter(selected)">Add Filter</button>
+  <div class="row">
+    <span class="col-3">{{description}}:</span>
+    <span class="col-6">
+      <b-form-select v-model="selected" :options="formattedOptions" />
+    </span>
+    <span class="col-3">
+      <b-button variant="outline-primary" @click="addFilter(selected)">Add Filter</b-button>
+    </span>
   </div>
 </template>
 

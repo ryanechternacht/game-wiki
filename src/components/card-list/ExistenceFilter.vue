@@ -1,12 +1,12 @@
 <template>
-  <div class="row">
-    <span class="col-3">{{description}}</span>
-    <span class="col-3">
+  <div>
+    <b-form inline>
+      <label class="mr-4">{{description}}</label>
       <b-button-group>
         <b-button @click="addHasFilter()" variant="outline-primary">Yes</b-button>
         <b-button @click="addDoesntHaveFilter()" variant="outline-primary">No</b-button>
       </b-button-group>
-    </span>
+    </b-form>
   </div>
 </template>
 

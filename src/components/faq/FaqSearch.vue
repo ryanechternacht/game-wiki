@@ -1,9 +1,9 @@
 <template>
   <div>
-    <form @submit.prevent="$emit('search', term)">
-      <input placeholder="search" v-model="term" />
-      <input type="submit" content="Search" />
-    </form>
+    <b-form @submit.prevent="submit" inline>
+      <b-input placeholder="search" v-model="term" class="mr-4" />
+      <b-button @click="submit">Search</b-button>
+    </b-form>
   </div>
 </template>
 
@@ -15,6 +15,11 @@ export default {
     return {
       term: this.initialSearch
     };
+  },
+  methods: {
+    submit() {
+      this.$emit("search", this.term);
+    }
   }
 };
 </script>

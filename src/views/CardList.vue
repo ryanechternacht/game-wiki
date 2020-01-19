@@ -30,7 +30,7 @@
     </div>
 
     <div class="header-row">
-      <button @click="this.clearFilters">Clear Filters</button>
+      <b-button @click="this.clearFilters" variant="primary">Clear Filters</b-button>
     </div>
 
     <hr />

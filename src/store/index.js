@@ -22,6 +22,13 @@ export default new Vuex.Store({
   mutations: {
     commitSearchFaq(state, faqs) {
       state.faqSearch = faqs;
+    },
+    commitAddFaq(state, faq) {
+      state.faqs.push(faq);
+    },
+    commitEditFaq(state, faq) {
+      let i = _.find(state.faqs, f => (f.id = faq.id));
+      state.faqs[i] = faq;
     }
   },
   actions: {
@@ -30,6 +37,15 @@ export default new Vuex.Store({
         return f.title.includes(term) || f.body.includes(term);
       });
       this.commit("commitSearchFaq", faqs);
+    },
+    saveFaq({ state }, { id, faq }) {
+      if (id == 0) {
+        let nextId = state.faqs.length + 1;
+        faq.id = nextId;
+        this.commit("commitAddFaq", faq);
+      } else {
+        this.commit;
+      }
     }
   },
   modules: {}

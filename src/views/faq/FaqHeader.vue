@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="float-right">
-      <b-button variant="primary" disabled>New Entry</b-button>
+      <b-button variant="primary" @click="routeToNewFaqPage">New Entry</b-button>
     </div>
-    <faq-search initialSearch="hello" @search="search" />
+    <faq-search initialSearch @search="search" />
     <div>Tags: ... ... ...</div>
   </div>
 </template>
@@ -19,6 +19,11 @@ export default {
       this.$router.push({
         name: "faq-search",
         params: { term }
+      });
+    },
+    routeToNewFaqPage() {
+      this.$router.push({
+        name: "faq-page-new"
       });
     }
   }

@@ -6,6 +6,7 @@ import FaqLayout from "@/views/faq/FaqLayout";
 import FaqHome from "@/views/faq/FaqHome";
 import FaqSearch from "@/views/faq/FaqSearch";
 import FaqPage from "@/views/faq/FaqPage";
+import FaqPageEdit from "@/views/faq/FaqPageEdit";
 
 Vue.use(VueRouter);
 
@@ -34,9 +35,23 @@ const routes = [
         props: true
       },
       {
+        path: "entry/new",
+        component: FaqPageEdit,
+        name: "faq-page-edit",
+        props: {
+          id: 0
+        }
+      },
+      {
         path: "entry/:id",
         component: FaqPage,
         name: "faq-page",
+        props: true
+      },
+      {
+        path: "entry/:id/edit",
+        component: FaqPageEdit,
+        name: "faq-page-edit",
         props: true
       }
     ]

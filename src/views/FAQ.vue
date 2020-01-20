@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import Editor from "@tinymce/tinymce-vue";
 
 export default {

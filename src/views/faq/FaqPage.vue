@@ -1,5 +1,11 @@
 <template>
   <div>
+    <div class="float-right">
+      <b-button variant="outline-primary" @click="edit">
+        <b-icon icon="pencil" />
+      </b-button>
+    </div>
+
     <h2>{{faq.title}}</h2>
 
     <h4>Tags</h4>
@@ -25,6 +31,13 @@ export default {
       return this.getFaq(this.id);
     }
   },
-  methods: {}
+  methods: {
+    edit() {
+      this.$router.push({
+        name: "faq-page-edit",
+        params: { id: this.id }
+      });
+    }
+  }
 };
 </script>

@@ -8,27 +8,29 @@
       <b-form-tags id="tags" v-model="faq.tags" class="mb-2" remove-on-delete />
     </b-form-group>
 
-    <h4>Body</h4>
-    <editor
-      initialValue
-      apiKey="2htrrda1ywukt91mvkpsd7m0j884up00dz8u5jrllk8cf325"
-      :init="{
-        height: 500,
-        menubar: false,
-        plugins: [
-          'advlist autolink lists link image charmap',
-          'searchreplace visualblocks code fullscreen',
-          'print preview anchor insertdatetime media',
-          'paste code help wordcount table'
-        ],
-        toolbar:
-          'undo redo | formatselect | bold italic | \
-          alignleft aligncenter alignright | \
-          bullist numlist outdent indent | help'
-      }"
-    />
+    <b-form-group label-for="body" label="Body">
+      <editor
+        initial-value
+        api-key="2htrrda1ywukt91mvkpsd7m0j884up00dz8u5jrllk8cf325"
+        id="body"
+        :init="{
+          height: 500,
+          menubar: false,
+          plugins: [
+            'advlist autolink lists link image charmap',
+            'searchreplace visualblocks code fullscreen',
+            'print preview anchor insertdatetime media',
+            'paste code help wordcount table'
+          ],
+          toolbar:
+            `undo redo | formatselect | bold italic |
+            alignleft aligncenter alignright |
+            bullist numlist outdent indent | help`
+        }"
+      />
+    </b-form-group>
 
-    <b-button @click="save" variant="primary">Save</b-button>
+    <b-button class="mt-4" @click="save" variant="primary">Save</b-button>
   </div>
 </template>
 
@@ -42,18 +44,14 @@ export default {
     Editor
   },
   created() {
-    let faq = this.getFaq(this.id);
-    if (faq) {
-      this.faq = faq;
-    }
+    this.loadFaq();
+  },
+  watch: {
+    $route: "loadFaq"
   },
   data() {
     return {
-      faq: {
-        title: "",
-        tags: [],
-        body: ""
-      }
+      faq: null
     };
   },
   computed: {
@@ -66,6 +64,19 @@ export default {
     ...mapActions(["saveFaq"]),
     save() {
       this.saveFaq({ faq: this.faq, id: this.id });
+    },
+    loadFaq() {
+      let faq = this.getFaq(this.id);
+      this.faq = faq || this.makeNewFaq();
+    },
+    makeNewFaq() {
+      return {
+        faq: {
+          title: "",
+          tags: [],
+          body: ""
+        }
+      };
     }
   }
 };

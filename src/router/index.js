@@ -37,7 +37,7 @@ const routes = [
       {
         path: "entry/new",
         component: FaqPageEdit,
-        name: "faq-page-edit",
+        name: "faq-page-new",
         props: {
           id: 0
         }

@@ -4,7 +4,7 @@ import VueRouter from "vue-router";
 import CardList from "@/views/CardList";
 import FaqLayout from "@/views/faq/FaqLayout";
 import FaqHome from "@/views/faq/FaqHome";
-import FaqSearch from "@/views/faq/FaqSearch";
+import FaqSearchResults from "@/views/faq/FaqSearchResults";
 import FaqPage from "@/views/faq/FaqPage";
 import FaqPageEdit from "@/views/faq/FaqPageEdit";
 
@@ -30,8 +30,8 @@ const routes = [
       },
       {
         path: "search/:term",
-        component: FaqSearch,
-        name: "faq-search",
+        component: FaqSearchResults,
+        name: "faq-search-results",
         props: true
       },
       {

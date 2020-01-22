@@ -10,11 +10,17 @@
 <script>
 export default {
   name: "faq-search",
-  props: ["initialSearch"],
+  props: ["searchTerm"],
   data() {
     return {
-      term: this.initialSearch
+      term: this.searchTerm
     };
+  },
+  watch: {
+    searchTerm(term) {
+      this.term = term;
+      this.submit();
+    }
   },
   methods: {
     submit() {

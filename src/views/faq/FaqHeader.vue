@@ -3,21 +3,37 @@
     <div class="float-right">
       <b-button variant="primary" @click="routeToNewFaqPage">New Entry</b-button>
     </div>
-    <faq-search initialSearch @search="search" />
-    <div>Tags: ... ... ...</div>
+    <faq-search :searchTerm="searchTerm" @search="search" />
+    <div class="mt-2">
+      <faq-popular-tags @tag-selected="searchTag" :tags="popularTags" />
+    </div>
   </div>
 </template>
 
 <script>
 import FaqSearch from "@/components/faq/FaqSearch";
+import FaqPopularTags from "@/components/faq/FaqPopularTags";
+import { mapState } from "vuex";
+
 export default {
+  data() {
+    return {
+      searchTerm: "hello"
+    };
+  },
   components: {
-    FaqSearch
+    FaqSearch,
+    FaqPopularTags
+  },
+  computed: {
+    ...mapState({
+      popularTags: state => state.popularFaqTags
+    })
   },
   methods: {
     search(term) {
       this.$router.push({
-        name: "faq-search",
+        name: "faq-search-results",
         params: { term }
       });
     },
@@ -25,6 +41,9 @@ export default {
       this.$router.push({
         name: "faq-page-new"
       });
+    },
+    searchTag(tag) {
+      this.searchTerm = tag;
     }
   }
 };

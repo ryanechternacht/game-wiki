@@ -12,7 +12,8 @@ export default new Vuex.Store({
   state: {
     cards: cardList.cards,
     faqs: faqList.faqs,
-    faqSearch: []
+    faqSearch: [],
+    popularFaqTags: ["general", "turmoil"]
   },
   getters: {
     getFaq: state => id => {

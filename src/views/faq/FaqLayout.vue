@@ -1,6 +1,6 @@
 <template>
   <div>
-    <faq-header />
+    <faq-header :initialSearchTerm="initialSearchTerm" />
 
     <hr />
 
@@ -12,6 +12,7 @@
 import FaqHeader from "./FaqHeader";
 
 export default {
+  props: ["initialSearchTerm"],
   components: {
     FaqHeader
   }

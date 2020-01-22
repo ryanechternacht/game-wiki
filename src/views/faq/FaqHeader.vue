@@ -16,9 +16,10 @@ import FaqPopularTags from "@/components/faq/FaqPopularTags";
 import { mapState } from "vuex";
 
 export default {
+  props: ["initialSearchTerm"],
   data() {
     return {
-      searchTerm: "hello"
+      searchTerm: this.initialSearchTerm
     };
   },
   components: {

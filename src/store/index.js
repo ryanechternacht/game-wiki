@@ -35,7 +35,11 @@ export default new Vuex.Store({
   actions: {
     searchFaq({ state }, { term }) {
       let faqs = _.filter(state.faqs, f => {
-        return f.title.includes(term) || f.body.includes(term);
+        return (
+          f.title.includes(term) ||
+          f.body.includes(term) ||
+          f.tags.includes(term)
+        );
       });
       this.commit("commitSearchFaq", faqs);
     },

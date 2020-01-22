@@ -20,7 +20,11 @@ const routes = [
     path: "/faq",
     component: FaqLayout,
     name: "faq",
-    props: true,
+    props(route) {
+      return {
+        initialSearchTerm: route.params.term
+      };
+    },
     children: [
       {
         path: "",

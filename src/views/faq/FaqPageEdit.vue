@@ -55,13 +55,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getFaq"]),
+    ...mapGetters("faq", ["getFaq"]),
     title() {
       return this.faq ? this.faq.title : "";
     }
   },
   methods: {
-    ...mapActions(["saveFaq"]),
+    ...mapActions("faq", ["saveFaq"]),
     save() {
       this.saveFaq({ faq: this.faq, id: this.id });
     },

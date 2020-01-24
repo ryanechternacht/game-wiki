@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     ...mapState({
-      popularTags: state => state.popularFaqTags
+      popularTags: state => state.faq.popularFaqTags
     })
   },
   methods: {

@@ -19,11 +19,11 @@ export default {
   },
   computed: {
     ...mapState({
-      searchedFaqs: state => state.faqSearch
+      searchedFaqs: state => state.faq.faqSearch
     })
   },
   methods: {
-    ...mapActions(["searchFaq"]),
+    ...mapActions("faq", ["searchFaq"]),
     search() {
       this.searchFaq({ term: this.term });
     }

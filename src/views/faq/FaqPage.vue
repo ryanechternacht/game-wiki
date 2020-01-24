@@ -26,7 +26,7 @@ export default {
     // fetch data?
   },
   computed: {
-    ...mapGetters(["getFaq"]),
+    ...mapGetters("faq", ["getFaq"]),
     faq() {
       return this.getFaq(this.id);
     }

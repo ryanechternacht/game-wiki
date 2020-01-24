@@ -78,7 +78,7 @@ export default {
   },
   computed: {
     ...mapState({
-      cards: state => state.cards
+      cards: state => state.cards.cards
     }),
     filteredCards() {
       if (!this.filters.length) {

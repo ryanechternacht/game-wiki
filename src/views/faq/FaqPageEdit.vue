@@ -61,13 +61,12 @@ export default {
       getNewId: "getNewlyCreatedFaqId"
     }),
     title() {
-      return this.faq ? this.faq.title : "";
+      return this.faq && this.faq.title;
     }
   },
   methods: {
     ...mapActions("faq", ["saveFaq"]),
     save() {
-      console.log({ faq: this.faq, id: this.id });
       this.saveFaq({ faq: this.faq, id: this.id });
       if (this.id) {
         this.$router.push({

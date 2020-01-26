@@ -43,7 +43,6 @@ export default {
       commit("commitSearchFaq", faqs);
     },
     saveFaq({ commit, state }, { id, faq }) {
-      console.log(id, faq);
       if (id == 0) {
         let nextId = state.faqs.length + 1;
         faq.id = nextId;

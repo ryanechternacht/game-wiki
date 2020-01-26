@@ -10,7 +10,7 @@
 
     <b-form-group label-for="body" label="Body">
       <editor
-        initial-value
+        v-model="faq.body"
         api-key="2htrrda1ywukt91mvkpsd7m0j884up00dz8u5jrllk8cf325"
         id="body"
         :init="{
@@ -47,7 +47,8 @@ export default {
     this.loadFaq();
   },
   watch: {
-    $route: "loadFaq"
+    $route: "loadFaq",
+    getNewId: "routeToNewFaq" // does this make sense?
   },
   data() {
     return {
@@ -55,7 +56,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("faq", ["getFaq"]),
+    ...mapGetters("faq", {
+      getFaq: "getFaq",
+      getNewId: "getNewlyCreatedFaqId"
+    }),
     title() {
       return this.faq ? this.faq.title : "";
     }
@@ -63,7 +67,14 @@ export default {
   methods: {
     ...mapActions("faq", ["saveFaq"]),
     save() {
+      console.log({ faq: this.faq, id: this.id });
       this.saveFaq({ faq: this.faq, id: this.id });
+      if (this.id) {
+        this.$router.push({
+          name: "faq-page",
+          params: { id: this.id }
+        });
+      } //else a watcher handles it
     },
     loadFaq() {
       let faq = this.getFaq(this.id);
@@ -77,6 +88,12 @@ export default {
           body: ""
         }
       };
+    },
+    routeToNewFaq() {
+      this.$router.push({
+        name: "faq-page",
+        params: { id: this.getNewId }
+      });
     }
   }
 };

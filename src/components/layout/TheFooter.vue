@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <div class="container">
-      <span>I'm a footer</span>
+      <span>Game Wiki &copy; 2020</span>
     </div>
   </div>
 </template>

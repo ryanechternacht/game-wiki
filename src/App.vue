@@ -1,35 +1,23 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="lg" type="dark" variant="primary">
-      <b-navbar-brand to="/">Game Wiki</b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item to="/" :class="{active: area == 'card-list'}">Card List</b-nav-item>
-          <b-nav-item to="/faq" :class="{active: area == 'faq'}">FAQ</b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
+    <the-header />
 
     <div class="container main-view">
       <router-view />
     </div>
+
+    <the-footer />
   </div>
 </template>
 
 <script>
+import TheHeader from "@/components/layout/TheHeader";
+import TheFooter from "@/components/layout/TheFooter";
+
 export default {
-  created() {
-    this.updateCurrentArea();
-  },
-  watch: {
-    $route: "updateCurrentArea"
-  },
-  methods: {
-    updateCurrentArea() {
-      this.area = this.$route.matched.length && this.$route.matched[0].name;
-    }
+  components: {
+    TheHeader,
+    TheFooter
   }
 };
 </script>

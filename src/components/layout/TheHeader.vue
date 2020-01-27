@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: "the-header",
   created() {
     this.updateCurrentArea();
   },

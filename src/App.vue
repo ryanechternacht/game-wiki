@@ -20,10 +20,8 @@
 
 <script>
 export default {
-  data() {
-    return {
-      area: "card-list"
-    };
+  created() {
+    this.updateCurrentArea();
   },
   watch: {
     $route: "updateCurrentArea"

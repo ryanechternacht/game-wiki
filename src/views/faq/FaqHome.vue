@@ -15,7 +15,6 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   created() {
-    console.log("created");
     this.fetchFaqOverviewList();
   },
   computed: {

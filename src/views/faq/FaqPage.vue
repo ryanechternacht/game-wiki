@@ -19,15 +19,16 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["id"],
   created() {
-    // fetch data?
+    this.fetchFaq({ id: this.id });
   },
   computed: {
     ...mapGetters("faq", ["getFaq"]),
     faq() {
+      console.log("faq");
       return this.getFaq(this.id);
     }
   },
@@ -37,7 +38,8 @@ export default {
         name: "faq-page-edit",
         params: { id: this.id }
       });
-    }
+    },
+    ...mapActions("faq", ["fetchFaq"])
   }
 };
 </script>

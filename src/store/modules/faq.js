@@ -4,7 +4,7 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
-    faqs: [],
+    faqs: {},
     faqsOverview: [],
     faqSearch: [],
     popularFaqTags: ["general", "turmoil"],
@@ -12,7 +12,7 @@ export default {
   },
   getters: {
     getFaq: state => id => {
-      return state.faqs[id - 1]; // hack
+      return state.faqs[id] || {};
     },
     getFaqOverviewList: state => {
       return state.faqsOverview;
@@ -24,6 +24,11 @@ export default {
   mutations: {
     commitFaqOverviewList(state, faqs) {
       state.faqsOverview = faqs;
+    },
+    commitFaq(state, faq) {
+      let newState = { ...state.faqs };
+      newState[faq.id] = faq;
+      state.faqs = newState;
     },
     commitSearchFaq(state, faqs) {
       state.faqSearch = faqs;
@@ -58,8 +63,6 @@ export default {
       }
     },
     fetchFaqOverviewList({ commit, state }) {
-      console.log("fetch");
-      console.log(state.faqOverviewList);
       if (state.faqs.length) {
         return;
       }
@@ -70,6 +73,17 @@ export default {
       }).then(response => {
         commit("commitFaqOverviewList", response.data);
       });
+    },
+    fetchFaq({ commit, state }, { id, force }) {
+      // enable updating here
+      if (force || true) {
+        axios({
+          url: `http://localhost:8890/faq/${id}`,
+          headers: { "Content-Type": "application/json" }
+        }).then(response => {
+          commit("commitFaq", response.data);
+        });
+      }
     }
   }
 };

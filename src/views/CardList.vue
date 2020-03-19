@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import CategoryFilter from "@/components/card-list/CategoryFilter";
 import ExistenceFilter from "@/components/card-list/ExistenceFilter";
 import FilterList from "@/components/card-list/FilterList";
@@ -76,10 +76,11 @@ export default {
       ]
     };
   },
+  created() {
+    this.fetchCards();
+  },
   computed: {
-    ...mapState({
-      cards: state => state.cards.cards
-    }),
+    ...mapGetters("cards", { cards: "getCards" }),
     filteredCards() {
       if (!this.filters.length) {
         return this.cards;
@@ -128,7 +129,8 @@ export default {
     },
     removeFilter(i) {
       this.filters.splice(i, 1);
-    }
+    },
+    ...mapActions("cards", ["fetchCards"])
   }
 };
 </script>

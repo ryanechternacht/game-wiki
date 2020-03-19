@@ -1,11 +1,11 @@
 import _ from "lodash";
-
-import faqList from "../data/faqs.js";
+import axios from "axios";
 
 export default {
   namespaced: true,
   state: {
-    faqs: faqList.faqs,
+    faqs: [],
+    faqsOverview: [],
     faqSearch: [],
     popularFaqTags: ["general", "turmoil"],
     newlyCreatedFaqId: 0
@@ -14,11 +14,17 @@ export default {
     getFaq: state => id => {
       return state.faqs[id - 1]; // hack
     },
+    getFaqOverviewList: state => {
+      return state.faqsOverview;
+    },
     getNewlyCreatedFaqId(state) {
       return state.newlyCreatedFaqId;
     }
   },
   mutations: {
+    commitFaqOverviewList(state, faqs) {
+      state.faqsOverview = faqs;
+    },
     commitSearchFaq(state, faqs) {
       state.faqSearch = faqs;
     },
@@ -50,6 +56,20 @@ export default {
       } else {
         commit("commitEditFaq", faq);
       }
+    },
+    fetchFaqOverviewList({ commit, state }) {
+      console.log("fetch");
+      console.log(state.faqOverviewList);
+      if (state.faqs.length) {
+        return;
+      }
+
+      axios({
+        url: "http://localhost:8890/faqs",
+        headers: { "Content-Type": "application/json" }
+      }).then(response => {
+        commit("commitFaqOverviewList", response.data);
+      });
     }
   }
 };

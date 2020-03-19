@@ -1,7 +1,28 @@
 <template>
-  <div>Home</div>
+  <div>
+    <h2>Home</h2>
+
+    <ul>
+      <li v-for="f in faqs" :key="f.id">
+        <router-link :to="{ name: 'faq-page', params: {id: f.id}}">{{f.title}}</router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
-export default {};
+import { mapActions, mapGetters } from "vuex";
+
+export default {
+  created() {
+    console.log("created");
+    this.fetchFaqOverviewList();
+  },
+  computed: {
+    ...mapGetters("faq", { faqs: "getFaqOverviewList" })
+  },
+  methods: {
+    ...mapActions("faq", ["fetchFaqOverviewList"])
+  }
+};
 </script>

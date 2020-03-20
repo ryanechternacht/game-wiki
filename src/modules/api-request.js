@@ -1,13 +1,13 @@
 import axios from "axios";
-// import env from "./env";
+import env from "./env";
 
 // var _token = '';
 
 function getInstance() {
   // var authHeader = `Bearer ${_token}`;
   return axios.create({
-    // baseURL: env.apiBaseUrl,
-    baseURL: "http://localhost:8890/",
+    baseURL: env.apiBaseUrl,
+    // baseURL: "http://localhost:8890/",
     headers: {
       // 'Authorization': authHeader
     },

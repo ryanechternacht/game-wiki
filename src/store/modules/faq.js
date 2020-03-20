@@ -36,10 +36,10 @@ export default {
       let overview = state.faqsOverview;
       return overview ? overview.data : [];
     },
-    getNewlyCreatedFaqId(state) {
+    newlyCreatedFaqId(state) {
       return state.newlyCreatedFaqId;
     },
-    getSearchedFaqs(state) {
+    searchedFaqs(state) {
       let search = state.faqSearchResults;
       return search ? search.data : [];
     },

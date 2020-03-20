@@ -18,7 +18,7 @@ export default {
     this.search();
   },
   computed: {
-    ...mapGetters("faq", { searchedFaqs: "getSearchedFaqs" })
+    ...mapGetters("faq", ["searchedFaqs"])
   },
   methods: {
     ...mapActions("faq", ["searchFaq"]),

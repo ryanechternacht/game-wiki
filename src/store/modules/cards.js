@@ -18,7 +18,7 @@ export default {
     cards: null
   },
   getters: {
-    getCards: state => {
+    cards: state => {
       let cards = state.cards;
       return cards ? cards.data : [];
     }
@@ -30,7 +30,7 @@ export default {
   },
   actions: {
     fetchCards({ commit, getters }) {
-      if (getters.getCards.length) {
+      if (getters.cards.length) {
         return;
       }
 

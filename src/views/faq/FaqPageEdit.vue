@@ -58,7 +58,7 @@ export default {
   computed: {
     ...mapGetters("faq", {
       getFaq: "getFaq",
-      getNewId: "getNewlyCreatedFaqId"
+      getNewId: "newlyCreatedFaqId"
     }),
     title() {
       return this.faq && this.faq.title;

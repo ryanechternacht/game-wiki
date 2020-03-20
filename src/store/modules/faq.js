@@ -1,5 +1,4 @@
-import _ from "lodash";
-import axios from "axios";
+import api from "@/modules/api-request";
 
 export default {
   namespaced: true,
@@ -41,38 +40,18 @@ export default {
     }
   },
   actions: {
-    searchFaq({ commit, state }, { term }) {
-      axios({
-        url: `http://localhost:8890/faqs/search/${term}`,
-        headers: { Accept: "application/json" },
-        method: "get"
-      }).then(response => {
+    searchFaq({ commit }, { term }) {
+      api.get(`faqs/search/${term}`).then(response => {
         commit("commitSearchFaq", response.data);
       });
     },
     saveFaq({ commit }, { faq }) {
       if (faq.id) {
-        axios({
-          url: `http://localhost:8890/faq/${faq.id}`,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          method: "put",
-          data: faq
-        }).then(response => {
+        api.put(`faq/${faq.id}`, faq).then(response => {
           commit("commitFaq", response.data);
         });
       } else {
-        axios({
-          url: "http://localhost:8890/faqs",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          method: "post",
-          data: faq
-        }).then(response => {
+        api.post("faqs", faq).then(response => {
           commit("commitNewFaq", response.data);
         });
       }
@@ -82,23 +61,17 @@ export default {
         return;
       }
 
-      axios({
-        url: "http://localhost:8890/faqs",
-        headers: { Accept: "application/json" }
-      }).then(response => {
+      api.get("faqs").then(response => {
         commit("commitFaqOverviewList", response.data);
       });
     },
-    fetchFaq({ commit }, { id, force }) {
+    fetchFaq({ commit }, { id }) {
       // enable updating here
-      if (force || true) {
-        axios({
-          url: `http://localhost:8890/faq/${id}`,
-          headers: { Accept: "application/json" }
-        }).then(response => {
-          commit("commitFaq", response.data);
-        });
-      }
+      // if (force || true) {
+      api.get(`faq/${id}`).then(response => {
+        commit("commitFaq", response.data);
+      });
+      // }
     }
   }
 };

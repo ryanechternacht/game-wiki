@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "@/modules/api-request";
 
 export default {
   namespaced: true,
@@ -21,10 +21,7 @@ export default {
         return;
       }
 
-      axios({
-        url: "http://localhost:8890/cards",
-        headers: { "Content-Type": "application/json" }
-      }).then(response => {
+      api.get("cards").then(response => {
         commit("setCards", response.data);
       });
     }

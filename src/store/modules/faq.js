@@ -42,13 +42,6 @@ export default {
   },
   actions: {
     searchFaq({ commit, state }, { term }) {
-      // let faqs = _.filter(state.faqs, f => {
-      //   return (
-      //     f.title.includes(term) ||
-      //     f.body.includes(term) ||
-      //     f.tags.includes(term)
-      //   );
-      // });
       axios({
         url: `http://localhost:8890/faqs/search/${term}`,
         headers: { Accept: "application/json" },

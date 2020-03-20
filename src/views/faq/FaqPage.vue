@@ -14,12 +14,13 @@
     </ul>
 
     <h4>Body</h4>
-    <p>{{faq.body}}</p>
+    <span v-html="faq.body"></span>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+
 export default {
   props: ["id"],
   created() {
@@ -28,7 +29,6 @@ export default {
   computed: {
     ...mapGetters("faq", ["getFaq"]),
     faq() {
-      console.log("faq");
       return this.getFaq(this.id);
     }
   },

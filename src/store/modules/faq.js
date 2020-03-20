@@ -30,16 +30,14 @@ export default {
       newState[faq.id] = faq;
       state.faqs = newState;
     },
+    commitNewFaq(state, faq) {
+      let newState = { ...state.faqs };
+      newState[faq.id] = faq;
+      state.faqs = newState;
+      state.newlyCreatedFaqId = faq.id;
+    },
     commitSearchFaq(state, faqs) {
       state.faqSearch = faqs;
-    },
-    commitAddFaq(state, faq) {
-      state.faqs.push(faq);
-      state.newlyCreatedFaqId = state.faqs.length;
-    },
-    commitEditFaq(state, faq) {
-      let i = _.find(state.faqs, f => (f.id = faq.id));
-      state.faqs[i] = faq;
     }
   },
   actions: {
@@ -53,13 +51,25 @@ export default {
       });
       commit("commitSearchFaq", faqs);
     },
-    saveFaq({ commit, state }, { id, faq }) {
-      if (id == 0) {
-        let nextId = state.faqs.length + 1;
-        faq.id = nextId;
-        commit("commitAddFaq", faq);
+    saveFaq({ commit }, { faq }) {
+      if (faq.id) {
+        axios({
+          url: `http://localhost:8890/faq/${faq.id}`,
+          headers: { "Content-Type": "application/json" },
+          method: "put",
+          data: faq
+        }).then(response => {
+          commit("commitFaq", response.data);
+        });
       } else {
-        commit("commitEditFaq", faq);
+        axios({
+          url: "http://localhost:8890/faqs",
+          headers: { "Content-Type": "application/json" },
+          method: "post",
+          data: faq
+        }).then(response => {
+          commit("commitNewFaq", response.data);
+        });
       }
     },
     fetchFaqOverviewList({ commit, state }) {
@@ -69,17 +79,17 @@ export default {
 
       axios({
         url: "http://localhost:8890/faqs",
-        headers: { "Content-Type": "application/json" }
+        headers: { Accept: "application/json" }
       }).then(response => {
         commit("commitFaqOverviewList", response.data);
       });
     },
-    fetchFaq({ commit, state }, { id, force }) {
+    fetchFaq({ commit }, { id, force }) {
       // enable updating here
       if (force || true) {
         axios({
           url: `http://localhost:8890/faq/${id}`,
-          headers: { "Content-Type": "application/json" }
+          headers: { Accept: "application/json" }
         }).then(response => {
           commit("commitFaq", response.data);
         });

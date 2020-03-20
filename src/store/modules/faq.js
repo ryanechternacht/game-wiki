@@ -1,3 +1,4 @@
+import moment from "moment";
 import api from "@/modules/api-request";
 
 // the API returns results as an object with the
@@ -26,7 +27,7 @@ export default {
       let faq = state.faqs[id];
       return faq ? faq.data : {};
     },
-    getFaqOverviewList: state => {
+    faqOverviewList: state => {
       let overview = state.faqsOverview;
       return overview ? overview.data : [];
     },
@@ -74,22 +75,35 @@ export default {
         });
       }
     },
-    fetchFaqOverviewList({ commit, state }) {
-      if (state.faqs.length) {
+    fetchFaqOverviewList({ commit, state }, { force } = {}) {
+      let current = state.faqsOverview;
+
+      if (
+        !current ||
+        force ||
+        moment().isAfter(moment(current["generated-at"]).add(5, "minutes"))
+      ) {
+        api.get("faqs").then(response => {
+          commit("commitFaqOverviewList", response.data);
+        });
+      }
+    },
+    fetchFaq({ commit, state }, { id, force } = {}) {
+      if (!id) {
         return;
       }
 
-      api.get("faqs").then(response => {
-        commit("commitFaqOverviewList", response.data);
-      });
-    },
-    fetchFaq({ commit }, { id }) {
-      // enable updating here
-      // if (force || true) {
-      api.get(`faq/${id}`).then(response => {
-        commit("commitFaq", response.data);
-      });
-      // }
+      let current = state.faqs[id];
+
+      if (
+        !current ||
+        force ||
+        moment().isAfter(moment(current["generated-at"]).add(5, "minutes"))
+      ) {
+        api.get(`faq/${id}`).then(response => {
+          commit("commitFaq", response.data);
+        });
+      }
     }
   }
 };

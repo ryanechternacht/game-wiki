@@ -5,7 +5,7 @@
     </div>
     <faq-search :searchTerm="searchTerm" @search="search" />
     <div class="mt-2">
-      <faq-popular-tags @tag-selected="searchTag" :tags="popularTags" />
+      <faq-popular-tags @tag-selected="searchTag" :tags="mostPopularTags" />
     </div>
   </div>
 </template>
@@ -13,23 +13,24 @@
 <script>
 import FaqSearch from "@/components/faq/FaqSearch";
 import FaqPopularTags from "@/components/faq/FaqPopularTags";
-import { mapState } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: ["initialSearchTerm"],
+  components: {
+    FaqSearch,
+    FaqPopularTags
+  },
   data() {
     return {
       searchTerm: this.initialSearchTerm
     };
   },
-  components: {
-    FaqSearch,
-    FaqPopularTags
+  created() {
+    this.fetchMostPopularTags();
   },
   computed: {
-    ...mapState({
-      popularTags: state => state.faq.popularFaqTags
-    })
+    ...mapGetters("faq", ["mostPopularTags"])
   },
   methods: {
     search(term) {
@@ -45,7 +46,8 @@ export default {
     },
     searchTag(tag) {
       this.searchTerm = tag;
-    }
+    },
+    ...mapActions("faq", ["fetchMostPopularTags"])
   }
 };
 </script>

@@ -18,7 +18,7 @@ export default {
     this.fetchFaqOverviewList();
   },
   computed: {
-    ...mapGetters("faq", { faqs: "getFaqOverviewList" })
+    ...mapGetters("faq", { faqs: "faqOverviewList" })
   },
   methods: {
     ...mapActions("faq", ["fetchFaqOverviewList"])

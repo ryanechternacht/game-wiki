@@ -80,7 +80,7 @@ export default {
     this.fetchCards();
   },
   computed: {
-    ...mapGetters("cards", { cards: "getCards" }),
+    ...mapGetters("cards", ["cards"]),
     filteredCards() {
       if (!this.filters.length) {
         return this.cards;

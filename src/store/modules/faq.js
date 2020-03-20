@@ -42,20 +42,29 @@ export default {
   },
   actions: {
     searchFaq({ commit, state }, { term }) {
-      let faqs = _.filter(state.faqs, f => {
-        return (
-          f.title.includes(term) ||
-          f.body.includes(term) ||
-          f.tags.includes(term)
-        );
+      // let faqs = _.filter(state.faqs, f => {
+      //   return (
+      //     f.title.includes(term) ||
+      //     f.body.includes(term) ||
+      //     f.tags.includes(term)
+      //   );
+      // });
+      axios({
+        url: `http://localhost:8890/faqs/search/${term}`,
+        headers: { Accept: "application/json" },
+        method: "get"
+      }).then(response => {
+        commit("commitSearchFaq", response.data);
       });
-      commit("commitSearchFaq", faqs);
     },
     saveFaq({ commit }, { faq }) {
       if (faq.id) {
         axios({
           url: `http://localhost:8890/faq/${faq.id}`,
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
           method: "put",
           data: faq
         }).then(response => {
@@ -64,7 +73,10 @@ export default {
       } else {
         axios({
           url: "http://localhost:8890/faqs",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
           method: "post",
           data: faq
         }).then(response => {
